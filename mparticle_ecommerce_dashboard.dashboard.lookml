@@ -18,42 +18,42 @@
 
     - name: platform
       type: field_filter
-      explore: rawevents
-      field: rawevents.platform
+      explore: otherevents
+      field: otherevents.platform
 
     - name: is_debug_data
       type: field_filter
-      explore: rawevents
-      field: rawevents.is_debug
+      explore: otherevents
+      field: otherevents.is_debug
 
     - name: event_1
       type: field_filter
-      explore: rawevents
-      field: rawevents.event_name
+      explore: otherevents
+      field: otherevents.event_name
       default_value: "eCommerce - ViewDetail"
 
     - name: event_2
       type: field_filter
-      explore: rawevents
-      field: rawevents.event_name
+      explore: otherevents
+      field: otherevents.event_name
       default_value: "eCommerce - AddToWishlist"
 
     - name: event_3
       type: field_filter
-      explore: rawevents
-      field: rawevents.event_name
+      explore: otherevents
+      field: otherevents.event_name
       default_value: "eCommerce - AddToCart"
 
     - name: event_4
       type: field_filter
-      explore: rawevents
-      field: rawevents.event_name
+      explore: otherevents
+      field: otherevents.event_name
       default_value: "eCommerce - Checkout"
 
     - name: event_5
       type: field_filter
-      explore: rawevents
-      field: rawevents.event_name
+      explore: otherevents
+      field: otherevents.event_name
       default_value: "eCommerce - Purchase"
 
   elements:
@@ -62,13 +62,13 @@
     title: Total Revenue
     type: single_value
     model: mparticle_looker_blocks
-    explore: rawevents
-    measures: [rawevents.revenue]
+    explore: otherevents
+    measures: [otherevents.revenue]
     listen:
-      date: rawevents.event_date
-      platform: rawevents.platform
-      is_debug_data: rawevents.is_debug
-    sorts: [rawevents.revenue desc]
+      date: otherevents.event_date
+      platform: otherevents.platform
+      is_debug_data: otherevents.is_debug
+    sorts: [otherevents.revenue desc]
     limit: 500
     font_size: small
     height: 2
@@ -78,13 +78,13 @@
     title: Unique User Count
     type: single_value
     model: mparticle_looker_blocks
-    explore: rawevents
-    measures: [rawevents.unique_user_count]
+    explore: otherevents
+    measures: [otherevents.unique_user_count]
     listen:
-      date: rawevents.event_date
-      platform: rawevents.platform
-      is_debug_data: rawevents.is_debug
-    sorts: [rawevents.unique_user_count desc]
+      date: otherevents.event_date
+      platform: otherevents.platform
+      is_debug_data: otherevents.is_debug
+    sorts: [otherevents.unique_user_count desc]
     limit: 500
     font_size: small
     height: 2
@@ -94,13 +94,13 @@
     title: ARPU
     type: single_value
     model: mparticle_looker_blocks
-    explore: rawevents
-    measures: [rawevents.arpu]
+    explore: otherevents
+    measures: [otherevents.arpu]
     listen:
-      date: rawevents.event_date
-      platform: rawevents.platform
-      is_debug_data: rawevents.is_debug
-    sorts: [rawevents.arpu desc]
+      date: otherevents.event_date
+      platform: otherevents.platform
+      is_debug_data: otherevents.is_debug
+    sorts: [otherevents.arpu desc]
     limit: 500
     font_size: small
     height: 2
@@ -110,15 +110,15 @@
   - name: Revenue by Attribution Source
     title: Revenue by Attribution Source
     listen:
-      date: rawevents.event_date
-      platform: rawevents.platform
-      is_debug_data: rawevents.is_debug
+      date: otherevents.event_date
+      platform: otherevents.platform
+      is_debug_data: otherevents.is_debug
     type: looker_column
     model: mparticle_looker_blocks
-    explore: rawevents
-    dimensions: [rawevents.attribution_publisher_name]
-    measures: [rawevents.revenue, rawevents.arpu]
-    sorts: [rawevents.revenue desc]
+    explore: otherevents
+    dimensions: [otherevents.attribution_publisher_name]
+    measures: [otherevents.revenue, otherevents.arpu]
+    sorts: [otherevents.revenue desc]
     limit: 500
     stacking: ''
     show_value_labels: false
@@ -144,24 +144,24 @@
     y_axis_labels: [Total Revenue, ARPU]
     y_axis_value_format: $#,##0.00
     series_types:
-      rawevents.arpu: line
+      otherevents.arpu: line
     series_labels:
-      rawevents.arpu: ARPU
-      rawevents.revenue: Total Revenue
+      otherevents.arpu: ARPU
+      otherevents.revenue: Total Revenue
     y_axis_orientation: [left, right]
 
   - name: Revenue by Hour of Day
     title: Revenue by Hour of Day
     listen:
-      date: rawevents.event_date
-      platform: rawevents.platform
-      is_debug_data: rawevents.is_debug
+      date: otherevents.event_date
+      platform: otherevents.platform
+      is_debug_data: otherevents.is_debug
     type: looker_column
     model: mparticle_looker_blocks
-    explore: rawevents
-    dimensions: [rawevents.hour]
-    measures: [rawevents.revenue, rawevents.arpu]
-    sorts: [rawevents.hour]
+    explore: otherevents
+    dimensions: [otherevents.hour]
+    measures: [otherevents.revenue, otherevents.arpu]
+    sorts: [otherevents.hour]
     limit: 500
     stacking: ''
     show_value_labels: false
@@ -187,24 +187,24 @@
     y_axis_labels: [Total Revenue, ARPU]
     y_axis_value_format: $#,##0.00
     series_types:
-      rawevents.arpu: line
+      otherevents.arpu: line
     series_labels:
-      rawevents.arpu: ARPU
-      rawevents.revenue: Total Revenue
+      otherevents.arpu: ARPU
+      otherevents.revenue: Total Revenue
     y_axis_orientation: [left, right]
 
   - name: Revenue & ARPU by Day
     title: Revenue & ARPU by Day
     listen:
-      date: rawevents.event_date
-      platform: rawevents.platform
-      is_debug_data: rawevents.is_debug
+      date: otherevents.event_date
+      platform: otherevents.platform
+      is_debug_data: otherevents.is_debug
     type: looker_column
     model: mparticle_looker_blocks
-    explore: rawevents
-    dimensions: [rawevents.event_date]
-    measures: [rawevents.revenue, rawevents.arpu]
-    sorts: [rawevents.event_date]
+    explore: otherevents
+    dimensions: [otherevents.event_date]
+    measures: [otherevents.revenue, otherevents.arpu]
+    sorts: [otherevents.event_date]
     limit: 500
     stacking: ''
     show_value_labels: false
@@ -230,29 +230,29 @@
     y_axis_labels: [Total Revenue, ARPU]
     y_axis_value_format: $#,##0.00
     series_types:
-      rawevents.arpu: line
+      otherevents.arpu: line
     series_labels:
-      rawevents.arpu: ARPU
-      rawevents.revenue: Total Revenue
+      otherevents.arpu: ARPU
+      otherevents.revenue: Total Revenue
     y_axis_orientation: [left, right]
 
   - name: Purchase Funnel Analytics by App Platform
     title: Purchase Funnel Analytics by App Platform
     type: looker_column
     model: mparticle_looker_blocks
-    explore: rawevents
+    explore: otherevents
     measures: [funnel.event_1_uu_count, funnel.event_2_uu_count, funnel.event_3_uu_count,
       funnel.event_4_uu_count, funnel.event_5_uu_count]
-    #dimensions: [rawevents.app_name_platform]
+    #dimensions: [otherevents.app_name_platform]
     listen:
-      date: rawevents.event_date
-      event_1: rawevents.event_1
-      event_2: rawevents.event_2
-      event_3: rawevents.event_3
-      event_4: rawevents.event_4
-      event_5: rawevents.event_5
-      platform: rawevents.platform
-      is_debug_data: rawevents.is_debug
+      date: otherevents.event_date
+      event_1: otherevents.event_1
+      event_2: otherevents.event_2
+      event_3: otherevents.event_3
+      event_4: otherevents.event_4
+      event_5: otherevents.event_5
+      platform: otherevents.platform
+      is_debug_data: otherevents.is_debug
     limit: 500
     column_limit: 50
     show_view_names: true

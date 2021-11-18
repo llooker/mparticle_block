@@ -1,6 +1,6 @@
-view: rawevents {
+view: otherevents {
   ## change to relevant schema name for block implementation
-  sql_table_name: app_191.eventsview ;;
+  sql_table_name: public.otherevents ;;
 
   dimension: app_id {
     type: number
@@ -310,8 +310,8 @@ view: rawevents {
 
   # Audience analytics fields #
   filter: audience_membership_filter {
-    suggest_explore: rawevents
-    suggest_dimension: rawevents.audience_membership
+    suggest_explore: otherevents
+    suggest_dimension: otherevents.audience_membership
     bypass_suggest_restrictions: yes
   }
 
@@ -323,27 +323,27 @@ view: rawevents {
   # Funnel Fields #
 
   filter: event_1 {
-    suggest_explore: rawevents
+    suggest_explore: otherevents
     suggest_dimension: event_name
   }
 
   filter: event_2 {
-    suggest_explore: rawevents
+    suggest_explore: otherevents
     suggest_dimension: event_name
   }
 
   filter: event_3 {
-    suggest_explore: rawevents
+    suggest_explore: otherevents
     suggest_dimension: event_name
   }
 
   filter: event_4 {
-    suggest_explore: rawevents
+    suggest_explore: otherevents
     suggest_dimension: event_name
   }
 
   filter: event_5 {
-    suggest_explore: rawevents
+    suggest_explore: otherevents
     suggest_dimension: event_name
   }
 
