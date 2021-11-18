@@ -1,4 +1,4 @@
-connection: "qa_redshift"
+connection: "se_redshift"
 
 # include all the views
 include: "*.view"
@@ -6,11 +6,11 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
-explore: rawevents {
-  sql_always_where: rawevents.eventtimestamp - coalesce(rawevents.firstseentimestamp, 0) >= 0 ;;
+explore: otherevents {
+  sql_always_where: otherevents.eventtimestamp - coalesce(otherevents.firstseentimestamp, 0) >= 0 ;;
 
   join: users {
-    sql_on: ${rawevents.mparticle_user_id} = ${users.mparticle_user_id} ;;
+    sql_on: ${otherevents.mparticle_user_id} = ${users.mparticle_user_id} ;;
     relationship: many_to_one
   }
 }

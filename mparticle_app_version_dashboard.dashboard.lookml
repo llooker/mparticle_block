@@ -23,14 +23,14 @@
 
     - name: platform
       type: field_filter
-      explore: rawevents
-      field: rawevents.platform
+      explore: otherevents
+      field: otherevents.platform
       default_value: Android
 
     - name: is_debug_data
       type: field_filter
-      explore: rawevents
-      field: rawevents.is_debug
+      explore: otherevents
+      field: otherevents.is_debug
 
   elements:
 
@@ -38,14 +38,14 @@
       title: Total Sessions by App Version
       type: looker_column
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.app_version]
-      measures: [rawevents.session_count]
-      sorts: [rawevents.session_count desc]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.app_version]
+      measures: [otherevents.session_count]
+      sorts: [otherevents.session_count desc]
       limit: 500
       stacking: ''
       show_value_labels: false
@@ -71,15 +71,15 @@
       title: Daily Sessions by App Version
       type: looker_line
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.app_version, rawevents.event_date]
-      pivots: [rawevents.app_version]
-      measures: [rawevents.session_count]
-      sorts: [rawevents.session_count desc 1, rawevents.app_version]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.app_version, otherevents.event_date]
+      pivots: [otherevents.app_version]
+      measures: [otherevents.session_count]
+      sorts: [otherevents.session_count desc 1, otherevents.app_version]
       limit: 500
       column_limit: 50
       stacking: ''
@@ -107,15 +107,15 @@
       title: Daily Avg Session Length by App Version
       type: looker_line
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.app_version, rawevents.eventhour_date]
-      pivots: [rawevents.app_version]
-      measures: [rawevents.avg_session_length]
-      sorts: [rawevents.session_count desc 1, rawevents.app_version]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.app_version, otherevents.eventhour_date]
+      pivots: [otherevents.app_version]
+      measures: [otherevents.avg_session_length]
+      sorts: [otherevents.session_count desc 1, otherevents.app_version]
       limit: 500
       column_limit: 50
       stacking: ''
@@ -143,15 +143,15 @@
       title: Daily ARPU by App Version
       type: looker_line
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.app_version, rawevents.eventhour_date]
-      pivots: [rawevents.app_version]
-      measures: [rawevents.arpu]
-      sorts: [rawevents.session_count desc 1, rawevents.app_version]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.app_version, otherevents.eventhour_date]
+      pivots: [otherevents.app_version]
+      measures: [otherevents.arpu]
+      sorts: [otherevents.session_count desc 1, otherevents.app_version]
       limit: 500
       column_limit: 50
       stacking: ''
@@ -179,27 +179,27 @@
       title: User Retention by App Version at Install
       type: looker_line
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
+        date: otherevents.event_date
         install_date: users.install_timestamp_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.weeks_since_install, users.app_version_at_install]
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.weeks_since_install, users.app_version_at_install]
       pivots: [users.app_version_at_install]
-      measures: [rawevents.unique_user_count]
+      measures: [otherevents.unique_user_count]
       filters:
-        rawevents.weeks_since_install: NOT NULL
+        otherevents.weeks_since_install: NOT NULL
         users.app_version_at_install: -NULL
       dynamic_fields:
       - table_calculation: user_retention_pct
         label: user retention pct
-        expression: ${rawevents.unique_user_count} / max(${rawevents.unique_user_count})
+        expression: ${otherevents.unique_user_count} / max(${otherevents.unique_user_count})
         value_format: '#,##0.00%'
-      sorts: [rawevents.weeks_since_install, rawevents.unique_user_count desc 0, users.app_version_at_install]
+      sorts: [otherevents.weeks_since_install, otherevents.unique_user_count desc 0, users.app_version_at_install]
       limit: 500
       column_limit: 50
-      hidden_fields: [rawevents.unique_user_count]
+      hidden_fields: [otherevents.unique_user_count]
       show_row_numbers: true
       stacking: ''
       show_value_labels: false

@@ -16,7 +16,7 @@ view: users {
           isnull(sum(eventltvvalue), 0) as ltv,
           isnull(sum(case when messagetypeid = 2 then eventlength / 1000 end), 0) as time_spent_in_app,
           min(case when messagetypeid = 7 then appversion end) as app_version_at_install
-        from app_191.eventsview
+        from public.otherevents
         group by 1)
       where install_timestamp is not null
        ;;

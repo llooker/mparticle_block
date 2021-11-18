@@ -31,46 +31,46 @@
 
     - name: platform
       type: field_filter
-      explore: rawevents
-      field: rawevents.platform
+      explore: otherevents
+      field: otherevents.platform
 
     - name: is_debug_data
       type: field_filter
-      explore: rawevents
-      field: rawevents.is_debug
+      explore: otherevents
+      field: otherevents.is_debug
 
     - name: event_1
       type: field_filter
-      explore: rawevents
-      field: rawevents.event_name
+      explore: otherevents
+      field: otherevents.event_name
 
     - name: event_2
       type: field_filter
-      explore: rawevents
-      field: rawevents.event_name
+      explore: otherevents
+      field: otherevents.event_name
 
     - name: event_3
       type: field_filter
-      explore: rawevents
-      field: rawevents.event_name
+      explore: otherevents
+      field: otherevents.event_name
 
     - name: event_4
       type: field_filter
-      explore: rawevents
-      field: rawevents.event_name
+      explore: otherevents
+      field: otherevents.event_name
 
   elements:
     - name: session_count
       title: Session Count
       type: single_value
       model: mparticle_looker_blocks
-      explore: rawevents
-      measures: [rawevents.session_count]
+      explore: otherevents
+      measures: [otherevents.session_count]
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      sorts: [rawevents.event_type_id, rawevents.platform, rawevents.session_count desc]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      sorts: [otherevents.event_type_id, otherevents.platform, otherevents.session_count desc]
       limit: 500
       font_size: small
       height: 2
@@ -80,13 +80,13 @@
       title: Average Session Length (Seconds)
       type: single_value
       model: mparticle_looker_blocks
-      explore: rawevents
-      measures: [rawevents.avg_session_length]
+      explore: otherevents
+      measures: [otherevents.avg_session_length]
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      sorts: [rawevents.event_type_id, rawevents.platform, rawevents.avg_session_length desc]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      sorts: [otherevents.event_type_id, otherevents.platform, otherevents.avg_session_length desc]
       limit: 500
       font_size: small
       height: 2
@@ -96,13 +96,13 @@
       title: Total Installs
       type: single_value
       model: mparticle_looker_blocks
-      explore: rawevents
-      measures: [rawevents.install_count]
+      explore: otherevents
+      measures: [otherevents.install_count]
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      sorts: [rawevents.event_type_id, rawevents.platform, rawevents.install_count desc]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      sorts: [otherevents.event_type_id, otherevents.platform, otherevents.install_count desc]
       limit: 500
       font_size: small
       height: 2
@@ -112,14 +112,14 @@
       title: Active Users by App Platform
       type: looker_column
       model: mparticle_looker_blocks
-      explore: rawevents
-      dimensions: [rawevents.app_name_platform]
-      measures: [rawevents.unique_user_count]
+      explore: otherevents
+      dimensions: [otherevents.app_name_platform]
+      measures: [otherevents.unique_user_count]
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      sorts: [rawevents.unique_user_count desc]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      sorts: [otherevents.unique_user_count desc]
       limit: 500
       column_limit: 50
       show_row_numbers: true
@@ -153,20 +153,20 @@
       title: Session Count Breakdown by OS Version
       type: looker_column
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.os_version, rawevents.platform]
-      pivots: [rawevents.platform]
-      measures: [rawevents.session_count]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.os_version, otherevents.platform]
+      pivots: [otherevents.platform]
+      measures: [otherevents.session_count]
       dynamic_fields:
       - table_calculation: session_pct
         label: session_pct
-        expression: ${rawevents.session_count} / ${rawevents.session_count:total}
+        expression: ${otherevents.session_count} / ${otherevents.session_count:total}
         value_format: 0.0%
-      sorts: [rawevents.session_count desc 0, rawevents.platform]
+      sorts: [otherevents.session_count desc 0, otherevents.platform]
       limit: 500
       column_limit: 50
       total: true
@@ -189,7 +189,7 @@
       show_null_labels: false
       value_labels: legend
       label_type: labPer
-      hidden_fields: [rawevents.session_count]
+      hidden_fields: [otherevents.session_count]
       y_axis_labels: ['% of Sessions']
       y_axis_value_format: 0.0%
       x_axis_label: OS Version
@@ -198,15 +198,15 @@
       title: DAU by App Platform
       type: looker_area
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.app_name_platform, rawevents.event_date]
-      pivots: [rawevents.app_name_platform]
-      measures: [rawevents.unique_user_count]
-      sorts: [rawevents.event_date desc, rawevents.app_name_platform]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.app_name_platform, otherevents.event_date]
+      pivots: [otherevents.app_name_platform]
+      measures: [otherevents.unique_user_count]
+      sorts: [otherevents.event_date desc, otherevents.app_name_platform]
       limit: 500
       column_limit: 50
       show_view_names: true
@@ -238,15 +238,15 @@
       title: Daily Avg Session Length by App Platform
       type: looker_line
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.event_date, rawevents.app_name_platform]
-      pivots: [rawevents.app_name_platform]
-      measures: [rawevents.avg_session_length]
-      sorts: [rawevents.event_date desc, rawevents.app_name_platform]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.event_date, otherevents.app_name_platform]
+      pivots: [otherevents.app_name_platform]
+      measures: [otherevents.avg_session_length]
+      sorts: [otherevents.event_date desc, otherevents.app_name_platform]
       limit: 500
       column_limit: 50
       stacking: ''
@@ -276,20 +276,20 @@
       title: Daily Time Spent In App Per User by App
       type: looker_line
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.event_date, rawevents.app_name_platform]
-      pivots: [rawevents.app_name_platform]
-      measures: [rawevents.time_spent_in_app, rawevents.unique_user_count]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.event_date, otherevents.app_name_platform]
+      pivots: [otherevents.app_name_platform]
+      measures: [otherevents.time_spent_in_app, otherevents.unique_user_count]
       dynamic_fields:
       - table_calculation: time_spent_in_app_per_user
         label: Time Spent In App Per User
-        expression: ${rawevents.time_spent_in_app} / ${rawevents.unique_user_count}
+        expression: ${otherevents.time_spent_in_app} / ${otherevents.unique_user_count}
         value_format: '0'
-      sorts: [rawevents.session_count desc 0, rawevents.platform, rawevents.app_name_platform]
+      sorts: [otherevents.session_count desc 0, otherevents.platform, otherevents.app_name_platform]
       limit: 500
       column_limit: 50
       stacking: ''
@@ -312,21 +312,21 @@
       interpolation: linear
       x_axis_label: Date
       y_axis_labels: [Time Spent In App Per User (in sec)]
-      hidden_fields: [rawevents.unique_user_count, rawevents.time_spent_in_app]
+      hidden_fields: [otherevents.unique_user_count, otherevents.time_spent_in_app]
 
     - name: session_cnt_by_hour
       title: Session Count by Hour of Day by App
       type: looker_area
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.app_name_platform, rawevents.hour]
-      pivots: [rawevents.app_name_platform]
-      measures: [rawevents.session_count]
-      sorts: [rawevents.session_count desc 1, rawevents.app_name_platform]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.app_name_platform, otherevents.hour]
+      pivots: [otherevents.app_name_platform]
+      measures: [otherevents.session_count]
+      sorts: [otherevents.session_count desc 1, otherevents.app_name_platform]
       limit: 500
       column_limit: 50
       show_view_names: true
@@ -358,15 +358,15 @@
       title: Daily Installs by App Platform
       type: looker_area
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.app_name_platform, rawevents.event_date]
-      pivots: [rawevents.app_name_platform]
-      measures: [rawevents.install_count]
-      sorts: [rawevents.event_date desc, rawevents.app_name_platform]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.app_name_platform, otherevents.event_date]
+      pivots: [otherevents.app_name_platform]
+      measures: [otherevents.install_count]
+      sorts: [otherevents.event_date desc, otherevents.app_name_platform]
       limit: 500
       column_limit: 50
       stacking: ''
@@ -396,15 +396,15 @@
       title: Daily Revenue by App Platform
       type: looker_area
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.app_name_platform, rawevents.event_date]
-      pivots: [rawevents.app_name_platform]
-      measures: [rawevents.revenue]
-      sorts: [rawevents.event_date desc, rawevents.app_name_platform]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.app_name_platform, otherevents.event_date]
+      pivots: [otherevents.app_name_platform]
+      measures: [otherevents.revenue]
+      sorts: [otherevents.event_date desc, otherevents.app_name_platform]
       limit: 500
       column_limit: 50
       stacking: ''
@@ -435,15 +435,15 @@
       title: Daily Session Count by App Platform
       type: looker_area
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.app_name_platform, rawevents.event_date]
-      pivots: [rawevents.app_name_platform]
-      measures: [rawevents.session_count]
-      sorts: [rawevents.event_date desc, rawevents.app_name_platform]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.app_name_platform, otherevents.event_date]
+      pivots: [otherevents.app_name_platform]
+      measures: [otherevents.session_count]
+      sorts: [otherevents.event_date desc, otherevents.app_name_platform]
       limit: 500
       column_limit: 50
       stacking: normal
@@ -473,22 +473,22 @@
       title: Top 50 Event Name Stats
       type: table
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.event_name]
-      measures: [rawevents.count, rawevents.unique_user_count]
+        date: otherevents.event_date
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.event_name]
+      measures: [otherevents.count, otherevents.unique_user_count]
       dynamic_fields:
       - table_calculation: event_count_per_user
         label: Event count per user
-        expression: ${rawevents.count} / ${rawevents.unique_user_count}
+        expression: ${otherevents.count} / ${otherevents.unique_user_count}
         value_format: '0.00'
       filters:
-        rawevents.event_name: -EMPTY
-        rawevents.message_type_id: '4,16'
-      sorts: [rawevents.count desc]
+        otherevents.event_name: -EMPTY
+        otherevents.message_type_id: '4,16'
+      sorts: [otherevents.count desc]
       limit: 50
       column_limit: 50
       show_view_names: true
@@ -514,18 +514,18 @@
       title: Funnel Analytics by App Platform
       type: looker_column
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       measures: [funnel.event_1_uu_count, funnel.event_2_uu_count, funnel.event_3_uu_count,
         funnel.event_4_uu_count]
-      dimensions: [rawevents.app_name_platform]
+      dimensions: [otherevents.app_name_platform]
       listen:
-        date: rawevents.event_date
-        event_1: rawevents.event_1
-        event_2: rawevents.event_2
-        event_3: rawevents.event_3
-        event_4: rawevents.event_4
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
+        date: otherevents.event_date
+        event_1: otherevents.event_1
+        event_2: otherevents.event_2
+        event_3: otherevents.event_3
+        event_4: otherevents.event_4
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
       limit: 500
       column_limit: 50
       show_view_names: true
@@ -560,27 +560,27 @@
       title: User Retention by Attribution Source
       type: looker_line
       model: mparticle_looker_blocks
-      explore: rawevents
+      explore: otherevents
       listen:
-        date: rawevents.event_date
+        date: otherevents.event_date
         install_date: users.install_timestamp_date
-        platform: rawevents.platform
-        is_debug_data: rawevents.is_debug
-      dimensions: [rawevents.weeks_since_install, users.attribution_source]
+        platform: otherevents.platform
+        is_debug_data: otherevents.is_debug
+      dimensions: [otherevents.weeks_since_install, users.attribution_source]
       pivots: [users.attribution_source]
-      measures: [rawevents.unique_user_count]
+      measures: [otherevents.unique_user_count]
       filters:
-        rawevents.weeks_since_install: NOT NULL
+        otherevents.weeks_since_install: NOT NULL
         users.attribution_source: -NULL
       dynamic_fields:
       - table_calculation: user_retention_pct
         label: user retention pct
-        expression: ${rawevents.unique_user_count} / max(${rawevents.unique_user_count})
+        expression: ${otherevents.unique_user_count} / max(${otherevents.unique_user_count})
         value_format: '#,##0.00%'
-      sorts: [rawevents.weeks_since_install, rawevents.unique_user_count desc 0, users.attribution_source]
+      sorts: [otherevents.weeks_since_install, otherevents.unique_user_count desc 0, users.attribution_source]
       limit: 500
       column_limit: 50
-      hidden_fields: [rawevents.unique_user_count]
+      hidden_fields: [otherevents.unique_user_count]
       show_row_numbers: true
       stacking: ''
       show_value_labels: false
